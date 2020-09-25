@@ -45,6 +45,8 @@ INSERT INTO `tblEnrollments` (` Subj`, `#`, `Title`, `Comp Numb`, `Sec`, `Ptrm`,
 <p>SELECT tblStudent.fldFirstName,` Subj`,`#`,`Title`,`Days`,`Start Time`, `End Time`, `Bldg`,`Room`,`Instructor` FROM tblEnrollments
 JOIN tblStudentEnrollments ON pmkEnrollmentId = pfkEnrollmentId JOIN tblStudent ON tblStudent.pmkNetId = tblStudentEnrollments.pfkStudentNetId  
 ORDER BY `tblEnrollments`.`Start Time` ASC</p>
+<p>INSERT INTO `tblStudentEnrollments` (`pfkStudentNetId`, `pfkEnrollmentId`) VALUES ('alconnor', '12','456');</p>
+<p>INSERT INTO `tblStudentEnrollments` (`pfkStudentNetId`, `pfkEnrollmentId`) VALUES ('sajepa', '789','900');</p>
 <?php
 include "footer.php"
 ?>
