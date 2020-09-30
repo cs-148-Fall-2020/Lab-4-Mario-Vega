@@ -27,31 +27,42 @@ include "top.php";
                 <th> Instructor </th>
 	</tr>
 <?php
+//create my default values in sql 
+$records = '';
 
 $sql = "SELECT tblStudent.fldFirstName,` Subj`,`#`,`Title`,`Days`,`Start Time`, `End Time`, `Bldg`,`Room`,`Instructor` FROM tblEnrollments
 JOIN tblStudentEnrollments ON pmkEnrollmentId = pfkEnrollmentId JOIN tblStudent ON tblStudent.pmkNetId = tblStudentEnrollments.pfkStudentNetId  
 ORDER BY `tblEnrollments`.`Start Time` ASC";
 
-$statement = $pdo->prepare($sql);
-$statement ->execute();
-$records = $statement->fetchAll();
-foreach ($records as $record){
-        print '<tr>';
-        print '<td>' . $record['fldFirstName'] . '</td>';
-        print '<td>' . $record[' Subj'] . '</td>';
-        print '<td>' . $record['#'] . '</td>';
-        print '<td>' . $record['Title'] . '</td>';
-        print '<td>' . $record['Days'] . '</td>';
-        print '<td>' . $record['Start Time'] . '</td>';
-        print '<td>' . $record['End Time'] . '</td>';
-	print '<td>' . $record['Bldg'] . '</td>';
-	print '<td>' . $record['Room'] . '</td>';
-        print '<td>' . $record['Instructor'] . '</td>';
-	
-	print '</tr>' . PHP_EOL;
+if($thisDatabaseReader->querySecurityOk($sql,0,1,2,0,0)) {
+    $sql = $thisDatabaseReader->sanitizeQuery($sql);
+    print "<p>QUERY: " . $sql;
+    $records = $thisDatabaseReader->select($sql, '');
+}
+if (DEBUG) {
+    print '<p>Contents of the array<pre>';
+    print_r($records);
+    print '</pre></p>';
+}
+if (is_array($records)) {
+    foreach ($records as $record){
+            print '<tr>';
+            print '<td>' . $record['fldFirstName'] . '</td>';
+            print '<td>' . $record[' Subj'] . '</td>';
+            print '<td>' . $record['#'] . '</td>';
+            print '<td>' . $record['Title'] . '</td>';
+            print '<td>' . $record['Days'] . '</td>';
+            print '<td>' . $record['Start Time'] . '</td>';
+            print '<td>' . $record['End Time'] . '</td>';
+            print '<td>' . $record['Bldg'] . '</td>';
+            print '<td>' . $record['Room'] . '</td>';
+            print '<td>' . $record['Instructor'] . '</td>';
+
+            print '</tr>' . PHP_EOL;
+    }
 }
 ?>
-      </table>
+     </table>
         </section>
     </article>
 </main>
