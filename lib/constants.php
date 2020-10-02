@@ -17,7 +17,7 @@ if (!empty($_GET)) {
 
 // i am not automatically sanitizing the POST array in case your form allows html
 
-define('DEBUG', true);
+define('DEBUG', false);
 
 define ('SERVER', htmlentities($_SERVER['SERVER_NAME'], ENT_QUOTES, 'UTF-8'));
 

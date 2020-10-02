@@ -1,21 +1,8 @@
-<!DOCTYPE HTML>
-<html lang = "en">
-<head>
-  <!-- basic.html -->
-  <title>We are working</title>
-  <meta charset = "UTF-8" />
-</head>
-<body>
-<?php 
-include "top.php";
-?>
-<main>
-    <article>
-        <section>
-  <table>
-	<caption><strong> Registar Enrollement </strong></caption>
-	<tr>
-                <th> Name </th>
+<?php include 'top.php';?>      
+<table>
+<tr>
+                <th> First Name </th>
+                <th> Last Name </th>
                 <th> Subject </th>
                 <th> # </th>
                 <th> Title </th>
@@ -27,27 +14,26 @@ include "top.php";
                 <th> Instructor </th>
 	</tr>
 <?php
-//create my default values in sql 
+
+//##############################################################################
+//
+// This page lists the records based on the query given
+// 
+//##############################################################################
 $records = '';
 
-$sql = "SELECT tblStudent.fldFirstName,` Subj`,`#`,`Title`,`Days`,`Start Time`, `End Time`, `Bldg`,`Room`,`Instructor` FROM tblEnrollments
-JOIN tblStudentEnrollments ON pmkEnrollmentId = pfkEnrollmentId JOIN tblStudent ON tblStudent.pmkNetId = tblStudentEnrollments.pfkStudentNetId  
-ORDER BY `tblEnrollments`.`Start Time` ASC";
-
-if($thisDatabaseReader->querySecurityOk($sql,0,1,2,0,0)) {
+$sql = "SELECT tblStudent.fldFirstName,tblStudent.fldLastName,` Subj`,`#`,`Title`,`Days`,`Start Time`, `End Time`, `Bldg`,`Room`,`Instructor` FROM tblEnrollments JOIN tblStudentEnrollments ON pmkEnrollmentId = pfkEnrollmentId JOIN tblStudent ON tblStudent.pmkNetId = tblStudentEnrollments.pfkStudentNetId WHERE tblStudentEnrollments.pfkStudentNetId = ? ORDER BY `tblEnrollments`.`Start Time` ASC";
+$data = array('sajepa');
+if ($thisDatabaseReader->querySecurityOk($sql,1,1)) {
     $sql = $thisDatabaseReader->sanitizeQuery($sql);
-    print "<p>QUERY: " . $sql;
-    $records = $thisDatabaseReader->select($sql, '');
-}
-if (DEBUG) {
-    print '<p>Contents of the array<pre>';
-    print_r($records);
-    print '</pre></p>';
+    $records = $thisDatabaseReader->select($sql, $data);
+    
 }
 if (is_array($records)) {
     foreach ($records as $record){
             print '<tr>';
             print '<td>' . $record['fldFirstName'] . '</td>';
+            print '<td>' . $record['fldLastName'] . '</td>';
             print '<td>' . $record[' Subj'] . '</td>';
             print '<td>' . $record['#'] . '</td>';
             print '<td>' . $record['Title'] . '</td>';
@@ -60,12 +46,8 @@ if (is_array($records)) {
 
             print '</tr>' . PHP_EOL;
     }
+   
 }
 ?>
-     </table>
-        </section>
-    </article>
-</main>
-    <?php include 'footer.php';?>
-</body>
-</html>
+</table>
+        <?php include 'footer.php';?>

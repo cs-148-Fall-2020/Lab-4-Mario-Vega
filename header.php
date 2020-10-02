@@ -1,23 +1,9 @@
-<!DOCTYPE html>
-<html lang="en>
-<head>
-	<title>Header</tite>
-</head>
-<body id="top.php">
-	<header>
-
-
-
-		</header>
-		<nav>
-
-
-		</nav>
-		<main>
-
-		</main>
-		<footer>
-	
-		</footer>
-	</body>
-</html>
+<!-- %%%%%%%%%%%%%%%%%%%%%%     Page header   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<header>
+    <figure class="float_right small">
+        <figcaption>We are in the header.</figcaption>
+    </figure>
+    <h1>Student classes</h1>
+    <h2>Tag line</h2>
+</header>
+<!-- %%%%%%%%%%%%%%%%%%%%% Ends Page header   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->

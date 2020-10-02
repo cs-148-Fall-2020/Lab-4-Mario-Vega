@@ -34,9 +34,6 @@
     <!-- **********************     Body section      ********************** -->
     <?php
     print '<body id="' . PATH_PARTS['filename'] . '">';
-    print PHP_EOL;
     include 'header.php';
-    print PHP_EOL;
-    print PHP_EOL;
     include 'nav.php';
     ?>
